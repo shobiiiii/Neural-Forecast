@@ -1,5 +1,5 @@
 // Define the URL of the server-side endpoint
-const url = '/backtest';
+const url = 'http://127.0.0.1:5000/submit';
 
 // Get references to the HTML elements that contain the user input
 const tokenInput = document.getElementById('token');
