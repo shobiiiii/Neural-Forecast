@@ -32,6 +32,7 @@ To run this project, you'll need the following Python libraries:
 - matplotlib
 - ta
 - holidays
+- pytz
 
 ## Backtest Results
 
