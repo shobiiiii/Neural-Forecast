@@ -8,7 +8,7 @@ CORS(app)
 def submit():
     data = request.json
     print('Received data:', data)
-    return 'Data received!'
+    return jsonify({'message': 'data received.'})
 
 if __name__ == '__main__':
     app.run(debug=True)
