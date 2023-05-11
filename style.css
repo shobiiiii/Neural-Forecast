@@ -1,17 +1,39 @@
+body {
+  font-family: 'Courier New', monospace;
+}
+
+h1 {
+  text-align: center;
+  font-size: 36px;
+  margin-top: 50px;
+  margin-right: 20px;
+  margin-bottom: 30px;
+}
+
 .container {
-  max-width: 600px;
+  display: flex;
+  justify-content: space-around;
+  max-width: 700px;
   margin: 0 auto;
+  padding: 20px;
+}
+
+#form-container {
+  flex: 1;
+  margin-right: 20px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
   background-color: #f9f9f9;
 }
 
-h1 {
-  text-align: center;
-  font-size: 36px;
-  margin-top: 0;
-  margin-bottom: 20px;
+#plot {
+  flex: 1;
+  margin-left: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
 }
 
 form {
@@ -22,7 +44,10 @@ form {
 
 label {
   font-size: 18px;
+  font-weight: bold;
   margin-right: 10px;
+  margin-bottom: 5px;
+  margin-top: 7px;
 }
 
 select,
@@ -42,8 +67,37 @@ input[type="submit"] {
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
-}
+  input[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
 
-input[type="submit"]:hover {
-  background-color: #3e8e41;
-}
+  #plot {
+    display: none; /* Initially hidden */
+  }
+
+  #plotImage {
+    max-width: 100%; /* Ensures the image fits in the div */
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  #form-container, #plot {
+    flex-basis: 48%; /* Each section will take up roughly half of the container's width */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
