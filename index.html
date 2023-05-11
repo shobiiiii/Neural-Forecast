@@ -9,16 +9,13 @@
     <div class="container">
       <h1>Backtesting Strategies</h1>
       <form>
-        <label for="token">Token:</label>
-        <select id="token" name="token">
+        <label for="asset">Asset:</label>
+        <select id="asset" name="asset">
           <option value="BTC">BTC</option>
           <option value="ETH">ETH</option>
         </select>
         <label for="strategy">Strategy:</label>
         <select id="strategy" name="strategy">
-          <option value="Buy and Hold">Buy and Hold</option>
-          <option value="OLS">OLS</option>
-          <option value="ARIMA">ARIMA</option>
           <option value="LSTM">LSTM</option>
         </select>
         <label for="start-date">Start Date:</label>
@@ -27,6 +24,11 @@
         <input type="date" id="end-date" name="end-date">
         <input type="submit" id="submit" value="Backtest">
       </form>
+      <div id="plot" style="display: none;">
+        <h2>Backtesting Result</h2>
+        <img id="plotImage" src="" alt="Backtest Plot">
+      </div>
+
     </div>
     <script src="app.js"></script>
   </body>
