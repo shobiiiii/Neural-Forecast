@@ -2,7 +2,7 @@
 const url = 'http://127.0.0.1:5000/submit';
 
 // Get references to the HTML elements that contain the user input
-const tokenInput = document.getElementById('token');
+const assetInput = document.getElementById('asset');
 const strategyInput = document.getElementById('strategy');
 const startDateInput = document.getElementById('start-date');
 const endDateInput = document.getElementById('end-date');
@@ -12,14 +12,14 @@ function handleSubmit(event) {
   event.preventDefault(); // Prevent the default form submission behavior
 
   // Get the user input from the HTML elements
-  const token = tokenInput.value;
+  const asset = assetInput.value;
   const strategy = strategyInput.value;
   const startDate = startDateInput.value;
   const endDate = endDateInput.value;
 
   // Define the data to send to the server
   const data = {
-    token,
+    asset,
     strategy,
     startDate,
     endDate
