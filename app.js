@@ -13,6 +13,7 @@ function handleSubmit(event) {
 
   // Get the user input from the HTML elements
   const asset = assetInput.value;
+  const assetType = assetInput.options[assetInput.selectedIndex].parentNode.label;
   const strategy = strategyInput.value;
   const startDate = startDateInput.value;
   const endDate = endDateInput.value;
@@ -20,6 +21,7 @@ function handleSubmit(event) {
   // Define the data to send to the server
   const data = {
     asset,
+    assetType,
     strategy,
     startDate,
     endDate

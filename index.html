@@ -13,17 +13,31 @@
           <h2>Select Your Asset and Dates</h2>
           <label for="asset">Asset:</label>
           <select id="asset" name="asset">
-            <option value="BTC">BTC</option>
-            <option value="ETH">ETH</option>
-          </select>
-          <label for="strategy">Strategy:</label>
-          <select id="strategy" name="strategy">
-            <option value="LSTM">LSTM</option>
+            <optgroup label="Cryptocurrencies">
+              <option value="BTC">BTC</option>
+              <option value="ETH">ETH</option>
+              <option value="DOGE">DOGE</option>
+            </optgroup>
+            <optgroup label="Forex">
+              <option value="EUR/USD">EUR/USD</option>
+              <option value="USD/JPY">USD/JPY</option>
+              <option value="GBP/USD">GBP/USD</option>
+            </optgroup>
+            <optgroup label="Stocks">
+              <option value="AAPL">Apple</option>
+              <option value="TSLA">Tesla</option>
+              <option value="NVDA">Nvidia</option>
+            </optgroup>
           </select>
           <label for="start-date">Start Date:</label>
           <input type="date" id="start-date" name="start-date">
           <label for="end-date">End Date:</label>
           <input type="date" id="end-date" name="end-date">
+          </select>
+          <label for="strategy">Strategy:</label>
+          <select id="strategy" name="strategy">
+            <option value="LSTM">LSTM</option>
+          </select>
           <input type="submit" id="submit" value="Backtest">
         </form>
       </div>

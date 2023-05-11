@@ -1,10 +1,26 @@
 
-def fetch_data(asset_type, symbol, start_date, end_date, interval='1d'):
+def process_asset_symbol(asset_type, asset):
+    """
+    Transforms the asset symbol based on the asset type.
+
+    :param asset_type: The type of the asset ('Cryptocurrencies', 'Forex', or 'Stocks')
+    :param asset: The asset symbol
+    :return: The transformed asset symbol
+    """
+    if asset_type == 'Cryptocurrencies':
+        asset = asset + '-USD'
+    elif asset_type == 'Forex':
+        asset = asset.replace('/', '') + '=X'
+        print(asset)
+    elif asset_type == 'Stocks':
+        pass  # No transformation needed for stocks
+    return asset
+
+def fetch_data(symbol, start_date, end_date, interval='1d'):
 
     """
     Fetch historical price data for the given asset type and symbol.
 
-    :param asset_type: A string representing the asset type ("forex", "crypto", or "stock")
     :param symbol: A string representing the asset's symbol (e.g., "EURUSD" for forex, "BTC-USD" for crypto, "TSLA" for stock)
     :param start_date: A string representing the start date in the format 'YYYY-MM-DD'
     :param end_date: A string representing the end date in the format 'YYYY-MM-DD'
@@ -13,8 +29,6 @@ def fetch_data(asset_type, symbol, start_date, end_date, interval='1d'):
 
     import yfinance as yf
 
-    if asset_type == "forex":
-        symbol = f"{symbol}=X"
     csv_filename = f"{symbol}_from_{start_date}_to_{end_date}_interval_{interval}.csv"
     yf_symbol = yf.Ticker(symbol)
     hist_data = yf_symbol.history(start=start_date, end=end_date, interval=interval)
@@ -54,17 +68,7 @@ def plot_data(symbol, hist_data, start_date, end_date):
     file_path = f"static/images/{symbol}_{start_date}_{end_date}.png"
     plt.savefig(file_path)
     plt.close(fig)
-    # plt.plot(hist_data.index, hist_data['Close'])
-    # plt.xlabel('Date')
-    # plt.ylabel('Price')
-    # plt.title(f"{symbol} Price ({start_date} to {end_date})")
-    # plt.grid(True)
-    # # plt.show(block=False)
-    #
-    # file_path = f"static/images/{symbol}_{start_date}_{end_date}.png"
-    # plt.savefig(file_path)
-    # plt.close()
-    #
+
     return file_path
 
 def save_to_csv(data, symbol, start_date, end_date, interval, dir_name='data'):
