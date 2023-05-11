@@ -40,12 +40,11 @@ function handleSubmit(event) {
   fetch(url, options)
     .then(response => response.json())
     .then(data => {
-      console.log(data);
-      // Handle the response from the server here
       // Update the src attribute of the img tag to display the plot
       document.getElementById('plotImage').src = data.image_url;
       // Show the div
       document.getElementById('plot').style.display = 'block';
+      console.log('Done.')
     })
     .catch(error => {
       console.error(error);

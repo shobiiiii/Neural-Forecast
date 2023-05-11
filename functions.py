@@ -1,3 +1,13 @@
+import os
+import yfinance as yf
+import pandas as pd
+
+import matplotlib
+matplotlib.use('Agg')  # use a non-interactive backend
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+
+
 
 def process_asset_symbol(asset_type, asset):
     """
@@ -8,16 +18,14 @@ def process_asset_symbol(asset_type, asset):
     :return: The transformed asset symbol
     """
     if asset_type == 'Cryptocurrencies':
-        asset = asset + '-USD'
+        symbol = asset + '-USD'
     elif asset_type == 'Forex':
-        asset = asset.replace('/', '') + '=X'
-        print(asset)
+        symbol = asset.replace('/', '') + '=X'
     elif asset_type == 'Stocks':
         pass  # No transformation needed for stocks
-    return asset
+    return symbol
 
 def fetch_data(symbol, start_date, end_date, interval='1d'):
-
     """
     Fetch historical price data for the given asset type and symbol.
 
@@ -26,13 +34,19 @@ def fetch_data(symbol, start_date, end_date, interval='1d'):
     :param end_date: A string representing the end date in the format 'YYYY-MM-DD'
     :return: A pandas DataFrame containing historical price data
     """
-
-    import yfinance as yf
-
+    dir_name = 'data'
     csv_filename = f"{symbol}_from_{start_date}_to_{end_date}_interval_{interval}.csv"
-    yf_symbol = yf.Ticker(symbol)
-    hist_data = yf_symbol.history(start=start_date, end=end_date, interval=interval)
-    save_to_csv(data=hist_data, symbol=symbol, start_date=start_date, end_date=end_date, interval=interval)
+    csv_filepath = os.path.join(dir_name, csv_filename)
+
+    if os.path.exists(csv_filepath) and os.path.getsize(csv_filepath) > 42:
+        print("CSV File Already Exist. Loading data from CSV file.")
+        hist_data = pd.read_csv(csv_filepath)
+    else:
+        print("CSV File does not exist. Querying data from yfinance.")
+        yf_symbol = yf.Ticker(symbol)
+        hist_data = yf_symbol.history(start=start_date, end=end_date, interval=interval)
+        save_to_csv(data=hist_data, symbol=symbol, start_date=start_date, end_date=end_date, interval=interval)
+
     return hist_data
 
 def plot_data(symbol, hist_data, start_date, end_date):
@@ -45,12 +59,6 @@ def plot_data(symbol, hist_data, start_date, end_date):
     :param start_date: A string representing the start date in the format 'YYYY-MM-DD'
     :param end_date: A string representing the end date in the format 'YYYY-MM-DD'
     """
-
-    import matplotlib
-    matplotlib.use('Agg')  # use a non-interactive backend
-    import matplotlib.pyplot as plt
-    import matplotlib.dates as mdates
-
     fig, ax = plt.subplots()
     ax.plot(hist_data.index, hist_data['Close'])
 
@@ -85,8 +93,6 @@ def save_to_csv(data, symbol, start_date, end_date, interval, dir_name='data'):
     :param interval: A string representing the interval for the data.
     :param dir_name: A string representing the name of the directory where the file will be saved. The default is 'data'.
     """
-    import os
-
     # Check if directory exists, if not, create it
     if not os.path.exists(dir_name):
         os.makedirs(dir_name)
