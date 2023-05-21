@@ -77,7 +77,12 @@ def plot_data(symbol, hist_data, start_date, end_date):
     ax.set_ylabel('Price')
     ax.set_title(f"{symbol} Price ({start_date} to {end_date})")
     ax.grid(True)
-
+    
+    dir_name = 'static/images/'
+    # Check if directory exists, if not, create it
+    if not os.path.exists(dir_name):
+        os.makedirs(dir_name)
+        
     file_path = f"static/images/{symbol}_{start_date}_{end_date}.png"
     plt.savefig(file_path)
     plt.close(fig)
