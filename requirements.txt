@@ -1,0 +1,14 @@
+pandas
+numpy
+scikit-learn
+tensorflow
+keras
+yfinance
+seaborn
+matplotlib
+ta
+holidays
+pytz
+flask
+flask-cors
+cherrypy
